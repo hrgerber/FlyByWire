@@ -27,6 +27,7 @@
 		33B3690D183B7DE900D0A1F6 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33B3690C183B7DE900D0A1F6 /* CoreLocation.framework */; };
 		33B36972183C112100D0A1F6 /* ABConnectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B3696F183C112100D0A1F6 /* ABConnectViewController.m */; };
 		33B36973183C112100D0A1F6 /* ABNetworkController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B36971183C112100D0A1F6 /* ABNetworkController.m */; };
+		33B36976183C150400D0A1F6 /* server.py in Resources */ = {isa = PBXBuildFile; fileRef = 33B36975183C150400D0A1F6 /* server.py */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,7 @@
 		33B3696F183C112100D0A1F6 /* ABConnectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABConnectViewController.m; sourceTree = "<group>"; };
 		33B36970183C112100D0A1F6 /* ABNetworkController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABNetworkController.h; sourceTree = "<group>"; };
 		33B36971183C112100D0A1F6 /* ABNetworkController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABNetworkController.m; sourceTree = "<group>"; };
+		33B36975183C150400D0A1F6 /* server.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = server.py; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 		33B368C2183B7BA000D0A1F6 = {
 			isa = PBXGroup;
 			children = (
+				33B36974183C150400D0A1F6 /* FlyByWireServerOSX */,
 				33B368D4183B7BA000D0A1F6 /* FlyByWire */,
 				33B368F6183B7BA100D0A1F6 /* FlyByWireTests */,
 				33B368CD183B7BA000D0A1F6 /* Frameworks */,
@@ -177,6 +180,14 @@
 				33B368F9183B7BA100D0A1F6 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		33B36974183C150400D0A1F6 /* FlyByWireServerOSX */ = {
+			isa = PBXGroup;
+			children = (
+				33B36975183C150400D0A1F6 /* server.py */,
+			);
+			path = FlyByWireServerOSX;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -262,6 +273,7 @@
 				33B368E5183B7BA000D0A1F6 /* Main_iPad.storyboard in Resources */,
 				33B368EA183B7BA100D0A1F6 /* Images.xcassets in Resources */,
 				33B368E2183B7BA000D0A1F6 /* Main_iPhone.storyboard in Resources */,
+				33B36976183C150400D0A1F6 /* server.py in Resources */,
 				33B368D9183B7BA000D0A1F6 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
