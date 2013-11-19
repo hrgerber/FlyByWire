@@ -1,5 +1,5 @@
 //
-//  ABViewController.h
+//  ABTouchView.h
 //  FlyByWire
 //
 //  Created by abductive on 2013/11/19.
@@ -7,12 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
 #import "ABTouchEvent.h"
-#import "ABTouchView.h"
 
-@interface ABViewController : UIViewController
+@interface ABTouchView : UIView
 
-@property (strong, nonatomic) IBOutlet ABTouchView *mainView;
+@property (strong, nonatomic) ABTouchEvent *touch;
 
 @end

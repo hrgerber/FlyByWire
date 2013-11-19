@@ -22,6 +22,9 @@
 		33B368F3183B7BA100D0A1F6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33B368D2183B7BA000D0A1F6 /* UIKit.framework */; };
 		33B368FB183B7BA100D0A1F6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 33B368F9183B7BA100D0A1F6 /* InfoPlist.strings */; };
 		33B368FD183B7BA100D0A1F6 /* FlyByWireTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B368FC183B7BA100D0A1F6 /* FlyByWireTests.m */; };
+		33B36908183B7C8500D0A1F6 /* ABTouchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B36907183B7C8500D0A1F6 /* ABTouchView.m */; };
+		33B3690B183B7CB900D0A1F6 /* ABTouchEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B3690A183B7CB900D0A1F6 /* ABTouchEvent.m */; };
+		33B3690D183B7DE900D0A1F6 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33B3690C183B7DE900D0A1F6 /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +58,11 @@
 		33B368F8183B7BA100D0A1F6 /* FlyByWireTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FlyByWireTests-Info.plist"; sourceTree = "<group>"; };
 		33B368FA183B7BA100D0A1F6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		33B368FC183B7BA100D0A1F6 /* FlyByWireTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FlyByWireTests.m; sourceTree = "<group>"; };
+		33B36906183B7C8500D0A1F6 /* ABTouchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABTouchView.h; sourceTree = "<group>"; };
+		33B36907183B7C8500D0A1F6 /* ABTouchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABTouchView.m; sourceTree = "<group>"; };
+		33B36909183B7CB900D0A1F6 /* ABTouchEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABTouchEvent.h; sourceTree = "<group>"; };
+		33B3690A183B7CB900D0A1F6 /* ABTouchEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABTouchEvent.m; sourceTree = "<group>"; };
+		33B3690C183B7DE900D0A1F6 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				33B3690D183B7DE900D0A1F6 /* CoreLocation.framework in Frameworks */,
 				33B368D1183B7BA000D0A1F6 /* CoreGraphics.framework in Frameworks */,
 				33B368D3183B7BA000D0A1F6 /* UIKit.framework in Frameworks */,
 				33B368CF183B7BA000D0A1F6 /* Foundation.framework in Frameworks */,
@@ -103,6 +112,7 @@
 		33B368CD183B7BA000D0A1F6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				33B3690C183B7DE900D0A1F6 /* CoreLocation.framework */,
 				33B368CE183B7BA000D0A1F6 /* Foundation.framework */,
 				33B368D0183B7BA000D0A1F6 /* CoreGraphics.framework */,
 				33B368D2183B7BA000D0A1F6 /* UIKit.framework */,
@@ -117,11 +127,15 @@
 				33B368DD183B7BA000D0A1F6 /* ABAppDelegate.h */,
 				33B368DE183B7BA000D0A1F6 /* ABAppDelegate.m */,
 				33B368E0183B7BA000D0A1F6 /* Main_iPhone.storyboard */,
+				33B36906183B7C8500D0A1F6 /* ABTouchView.h */,
+				33B36907183B7C8500D0A1F6 /* ABTouchView.m */,
 				33B368E3183B7BA000D0A1F6 /* Main_iPad.storyboard */,
 				33B368E6183B7BA000D0A1F6 /* ABViewController.h */,
 				33B368E7183B7BA000D0A1F6 /* ABViewController.m */,
 				33B368E9183B7BA100D0A1F6 /* Images.xcassets */,
 				33B368D5183B7BA000D0A1F6 /* Supporting Files */,
+				33B36909183B7CB900D0A1F6 /* ABTouchEvent.h */,
+				33B3690A183B7CB900D0A1F6 /* ABTouchEvent.m */,
 			);
 			path = FlyByWire;
 			sourceTree = "<group>";
@@ -255,7 +269,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				33B368DB183B7BA000D0A1F6 /* main.m in Sources */,
+				33B36908183B7C8500D0A1F6 /* ABTouchView.m in Sources */,
 				33B368E8183B7BA000D0A1F6 /* ABViewController.m in Sources */,
+				33B3690B183B7CB900D0A1F6 /* ABTouchEvent.m in Sources */,
 				33B368DF183B7BA000D0A1F6 /* ABAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -397,6 +413,7 @@
 				GCC_PREFIX_HEADER = "FlyByWire/FlyByWire-Prefix.pch";
 				INFOPLIST_FILE = "FlyByWire/FlyByWire-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -410,6 +427,7 @@
 				GCC_PREFIX_HEADER = "FlyByWire/FlyByWire-Prefix.pch";
 				INFOPLIST_FILE = "FlyByWire/FlyByWire-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

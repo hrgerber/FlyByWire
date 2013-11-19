@@ -2,7 +2,7 @@
 //  ABAppDelegate.h
 //  FlyByWire
 //
-//  Created by NioCAD on 2013/11/19.
+//  Created by abductive on 2013/11/19.
 //  Copyright (c) 2013 Retief Gerber. All rights reserved.
 //
 
