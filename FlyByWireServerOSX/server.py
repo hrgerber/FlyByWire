@@ -1,3 +1,11 @@
+#
+#  server.py
+#  FlyByWire
+#
+#  Created by abductive on 2013/11/19.
+#  Copyright (c) 2013 Retief Gerber. All rights reserved.
+#
+
 from twisted.internet.protocol import Factory, Protocol
 from twisted.internet import reactor
 
