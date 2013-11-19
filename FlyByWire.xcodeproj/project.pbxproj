@@ -25,6 +25,8 @@
 		33B36908183B7C8500D0A1F6 /* ABTouchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B36907183B7C8500D0A1F6 /* ABTouchView.m */; };
 		33B3690B183B7CB900D0A1F6 /* ABTouchEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B3690A183B7CB900D0A1F6 /* ABTouchEvent.m */; };
 		33B3690D183B7DE900D0A1F6 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33B3690C183B7DE900D0A1F6 /* CoreLocation.framework */; };
+		33B36972183C112100D0A1F6 /* ABConnectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B3696F183C112100D0A1F6 /* ABConnectViewController.m */; };
+		33B36973183C112100D0A1F6 /* ABNetworkController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B36971183C112100D0A1F6 /* ABNetworkController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +65,10 @@
 		33B36909183B7CB900D0A1F6 /* ABTouchEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABTouchEvent.h; sourceTree = "<group>"; };
 		33B3690A183B7CB900D0A1F6 /* ABTouchEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABTouchEvent.m; sourceTree = "<group>"; };
 		33B3690C183B7DE900D0A1F6 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		33B3696E183C112100D0A1F6 /* ABConnectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABConnectViewController.h; sourceTree = "<group>"; };
+		33B3696F183C112100D0A1F6 /* ABConnectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABConnectViewController.m; sourceTree = "<group>"; };
+		33B36970183C112100D0A1F6 /* ABNetworkController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABNetworkController.h; sourceTree = "<group>"; };
+		33B36971183C112100D0A1F6 /* ABNetworkController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABNetworkController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +130,10 @@
 		33B368D4183B7BA000D0A1F6 /* FlyByWire */ = {
 			isa = PBXGroup;
 			children = (
+				33B3696E183C112100D0A1F6 /* ABConnectViewController.h */,
+				33B3696F183C112100D0A1F6 /* ABConnectViewController.m */,
+				33B36970183C112100D0A1F6 /* ABNetworkController.h */,
+				33B36971183C112100D0A1F6 /* ABNetworkController.m */,
 				33B368DD183B7BA000D0A1F6 /* ABAppDelegate.h */,
 				33B368DE183B7BA000D0A1F6 /* ABAppDelegate.m */,
 				33B368E0183B7BA000D0A1F6 /* Main_iPhone.storyboard */,
@@ -217,6 +227,9 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Retief Gerber";
 				TargetAttributes = {
+					33B368CA183B7BA000D0A1F6 = {
+						DevelopmentTeam = 2VCJXQF5XC;
+					};
 					33B368EE183B7BA100D0A1F6 = {
 						TestTargetID = 33B368CA183B7BA000D0A1F6;
 					};
@@ -268,6 +281,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				33B36972183C112100D0A1F6 /* ABConnectViewController.m in Sources */,
+				33B36973183C112100D0A1F6 /* ABNetworkController.m in Sources */,
 				33B368DB183B7BA000D0A1F6 /* main.m in Sources */,
 				33B36908183B7C8500D0A1F6 /* ABTouchView.m in Sources */,
 				33B368E8183B7BA000D0A1F6 /* ABViewController.m in Sources */,
@@ -409,6 +424,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FlyByWire/FlyByWire-Prefix.pch";
 				INFOPLIST_FILE = "FlyByWire/FlyByWire-Info.plist";
@@ -423,6 +439,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FlyByWire/FlyByWire-Prefix.pch";
 				INFOPLIST_FILE = "FlyByWire/FlyByWire-Info.plist";
@@ -493,6 +510,7 @@
 				33B36902183B7BA100D0A1F6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		33B36903183B7BA100D0A1F6 /* Build configuration list for PBXNativeTarget "FlyByWireTests" */ = {
 			isa = XCConfigurationList;
@@ -501,6 +519,7 @@
 				33B36905183B7BA100D0A1F6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

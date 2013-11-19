@@ -11,8 +11,11 @@
 #import "ABTouchEvent.h"
 #import "ABTouchView.h"
 
-@interface ABViewController : UIViewController
+#import "ABNetworkController.h"
+
+@interface ABViewController : UIViewController <ABNetworkControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet ABTouchView *mainView;
+@property (strong, nonatomic) ABNetworkController *networkController;
 
 @end
