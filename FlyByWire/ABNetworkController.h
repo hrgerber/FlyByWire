@@ -13,6 +13,7 @@
 @optional
 - (void)connectedToServer;
 - (void)unableToConnect;
+- (void)connectionClosed;
 - (void)receivedMessage:(NSString *)msg;
 
 @end

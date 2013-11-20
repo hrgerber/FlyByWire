@@ -92,10 +92,25 @@
     return YES;
 }
 
-- (void)receivedMessage:(NSString *)msg
+ - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
-    // Needs to be implemented
-}
+    // TODO: This code is repeated in ABConnectionViewController, need a utility lib for this
+    CGFloat width;
+    CGFloat height;
 
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    
+    if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation))
+    {
+        width = screenRect.size.height;
+        height = screenRect.size.width;
+    } else {
+        width = screenRect.size.width;
+        height = screenRect.size.height;
+    }
+    NSString *msg = [NSString stringWithFormat:@"bounds:%.0f:%.0f", width, height];
+
+    [self.networkController sendMessage:msg];
+}
 
 @end

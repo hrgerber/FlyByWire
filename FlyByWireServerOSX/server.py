@@ -5,11 +5,23 @@
 #  Created by abductive on 2013/11/19.
 #  Copyright (c) 2013 Retief Gerber. All rights reserved.
 #
+from time import sleep
 
 from twisted.internet.protocol import Factory, Protocol
 from twisted.internet import reactor
 
 from Quartz.CoreGraphics import CGEventCreateMouseEvent,CGEventPost,kCGEventMouseMoved,kCGEventLeftMouseDown,kCGEventLeftMouseUp,kCGMouseButtonLeft, kCGHIDEventTap
+from AppKit import NSScreen
+
+screen_frame = NSScreen.mainScreen().frame()
+
+screen_width = screen_frame.size.width
+screen_height = screen_frame.size.height
+
+print "Host screen size", screen_width, screen_height
+
+touch_width = object()
+touch_height = object()
 
 def mouseEvent(type, posx, posy):
         theEvent = CGEventCreateMouseEvent(
@@ -39,13 +51,23 @@ class IphoneRemoteServer(Protocol):
         self.factory.clients.remove(self)
  
     def dataReceived(self, data):
-        print data
         items = data.split(":")
+        if len(items) == 3:
+        	global touch_width, touch_height
+        	(bounds, touch_width, touch_height) = items
+        	if (bounds == "bounds"):
+				print 'Touch Bounds', touch_width, touch_height 
+				sleep(1)
+				self.transport.write("configured")
+
         if len(items) == 4:
             (event, etype, x, y) = items
-            xs = float(x)/480*1900
-            ys = float(y)/320*1080
-            mousemove(xs,ys)
+            if (event == "touch"):
+            	global screen_width, screen_height
+            	xs = float(x)/float(touch_width)*screen_width
+            	ys = float(y)/float(touch_height)*screen_height
+            	print "Mouse position", int(xs), int(ys)
+            	mousemove(xs,ys)
 
 
 

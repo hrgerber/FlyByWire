@@ -62,7 +62,7 @@ static CGFloat black[] = {0.0,0.0,0.0,1.0};
     }
     
     CGContextBeginPath(context);
-    CGContextAddEllipseInRect(context, CGRectMake(self.touch.point.x-10, self.touch.point.y-10, 20, 20));
+    CGContextAddEllipseInRect(context, CGRectMake(self.touch.point.x-25, self.touch.point.y-25, 50, 50));
     CGContextDrawPath(context, kCGPathFill);
     
 }

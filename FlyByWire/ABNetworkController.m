@@ -74,17 +74,36 @@
 			break;
             
 		case NSStreamEventEndEncountered:
-			break;
+            if ([self.delegate respondsToSelector:@selector(connectionClosed)])
+                [self.delegate connectionClosed];
+            break;
+            
+            
+        case NSStreamEventNone:
+            NSLog(@"None event");
+            break;
+            
+        
+        case NSStreamEventHasSpaceAvailable:
+            NSLog(@"Space available");
+            break;
             
 		default:
 			NSLog(@"Unknown event");
 	}
 }
 
-- (void)sendMessage:(NSString *)msg
+- (void)threadedSendMessage:(NSString *)msg
 {
     NSData *data = [[NSData alloc] initWithData:[msg dataUsingEncoding:NSASCIIStringEncoding]];
     [self.outputStream write:[data bytes]  maxLength:[data length]];
+
+}
+- (void)sendMessage:(NSString *)msg
+{
+    // This will ensure the send messages while handling a received message does not block
+    // TODO: Figure out if there is a better way to do this
+    [self performSelectorInBackground:@selector(threadedSendMessage:) withObject:msg];
 }
 
 

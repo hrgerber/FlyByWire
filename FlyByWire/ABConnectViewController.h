@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 #import "ABNetworkController.h"
+#import "ABViewController.h"
 
 @interface ABConnectViewController : UIViewController <ABNetworkControllerDelegate>
 
@@ -17,6 +18,9 @@
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *connectingActivity;
 @property (weak, nonatomic) IBOutlet UIButton *connectBtn;
 @property (weak, nonatomic) IBOutlet UIButton *disconnectBtn;
+@property (weak, nonatomic) IBOutlet UIButton *cancelBtn;
+@property (weak, nonatomic) IBOutlet UILabel *statusLabel;
 
+@property (weak, nonatomic) ABViewController *touchViewController;
 
 @end
