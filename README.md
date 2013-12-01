@@ -6,8 +6,8 @@ Remotely control your mouse cursor from your iPhone or iPad
 
 Xcode project with everything included. You know what to do.
 
-The remote server can be run with the server.py script that's in the FlyByWireServerOSX folder.
+The remote server can be installed with the .dmg install file in the FlyByWireServerOSX folder.
 
-The server depends on pyObjC and twisted.
+There are a number of known issues, which will be attened to shortly.
 
 Enjoy
