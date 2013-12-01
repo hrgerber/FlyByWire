@@ -2,8 +2,8 @@
 //  ABTouchEvent.h
 //  FlyByWire
 //
-//  Created by abductive on 2013/11/19.
-//  Copyright (c) 2013 Retief Gerber. All rights reserved.
+//  Created by Retief Gerber on 2013/11/19.
+//  Copyright (c) 2013 abductive. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

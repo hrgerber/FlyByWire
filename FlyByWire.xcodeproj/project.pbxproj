@@ -15,7 +15,7 @@
 		33B368DF183B7BA000D0A1F6 /* ABAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B368DE183B7BA000D0A1F6 /* ABAppDelegate.m */; };
 		33B368E2183B7BA000D0A1F6 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 33B368E0183B7BA000D0A1F6 /* Main_iPhone.storyboard */; };
 		33B368E5183B7BA000D0A1F6 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 33B368E3183B7BA000D0A1F6 /* Main_iPad.storyboard */; };
-		33B368E8183B7BA000D0A1F6 /* ABViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B368E7183B7BA000D0A1F6 /* ABViewController.m */; };
+		33B368E8183B7BA000D0A1F6 /* ABTouchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B368E7183B7BA000D0A1F6 /* ABTouchViewController.m */; };
 		33B368EA183B7BA100D0A1F6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33B368E9183B7BA100D0A1F6 /* Images.xcassets */; };
 		33B368F1183B7BA100D0A1F6 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33B368F0183B7BA100D0A1F6 /* XCTest.framework */; };
 		33B368F2183B7BA100D0A1F6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33B368CE183B7BA000D0A1F6 /* Foundation.framework */; };
@@ -25,10 +25,10 @@
 		33B36908183B7C8500D0A1F6 /* ABTouchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B36907183B7C8500D0A1F6 /* ABTouchView.m */; };
 		33B3690B183B7CB900D0A1F6 /* ABTouchEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B3690A183B7CB900D0A1F6 /* ABTouchEvent.m */; };
 		33B3690D183B7DE900D0A1F6 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33B3690C183B7DE900D0A1F6 /* CoreLocation.framework */; };
-		33B36972183C112100D0A1F6 /* ABConnectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B3696F183C112100D0A1F6 /* ABConnectViewController.m */; };
 		33B36973183C112100D0A1F6 /* ABNetworkController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B36971183C112100D0A1F6 /* ABNetworkController.m */; };
-		33B36976183C150400D0A1F6 /* server.py in Resources */ = {isa = PBXBuildFile; fileRef = 33B36975183C150400D0A1F6 /* server.py */; };
 		33B36978183C15E800D0A1F6 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 33B36977183C15E800D0A1F6 /* README.md */; };
+		9B0A922518473CAC002D5AB3 /* ABNetworkBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B0A922418473CAC002D5AB3 /* ABNetworkBrowserViewController.m */; };
+		9B4005EC1847312200D269D4 /* ABNetworkServiceBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B4005EB1847312200D269D4 /* ABNetworkServiceBrowser.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,8 +54,8 @@
 		33B368DE183B7BA000D0A1F6 /* ABAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ABAppDelegate.m; sourceTree = "<group>"; };
 		33B368E1183B7BA000D0A1F6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
 		33B368E4183B7BA000D0A1F6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
-		33B368E6183B7BA000D0A1F6 /* ABViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ABViewController.h; sourceTree = "<group>"; };
-		33B368E7183B7BA000D0A1F6 /* ABViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ABViewController.m; sourceTree = "<group>"; };
+		33B368E6183B7BA000D0A1F6 /* ABTouchViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ABTouchViewController.h; sourceTree = "<group>"; };
+		33B368E7183B7BA000D0A1F6 /* ABTouchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ABTouchViewController.m; sourceTree = "<group>"; };
 		33B368E9183B7BA100D0A1F6 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		33B368EF183B7BA100D0A1F6 /* FlyByWireTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FlyByWireTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		33B368F0183B7BA100D0A1F6 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -67,12 +67,14 @@
 		33B36909183B7CB900D0A1F6 /* ABTouchEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABTouchEvent.h; sourceTree = "<group>"; };
 		33B3690A183B7CB900D0A1F6 /* ABTouchEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABTouchEvent.m; sourceTree = "<group>"; };
 		33B3690C183B7DE900D0A1F6 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		33B3696E183C112100D0A1F6 /* ABConnectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABConnectViewController.h; sourceTree = "<group>"; };
-		33B3696F183C112100D0A1F6 /* ABConnectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABConnectViewController.m; sourceTree = "<group>"; };
 		33B36970183C112100D0A1F6 /* ABNetworkController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABNetworkController.h; sourceTree = "<group>"; };
 		33B36971183C112100D0A1F6 /* ABNetworkController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABNetworkController.m; sourceTree = "<group>"; };
-		33B36975183C150400D0A1F6 /* server.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = server.py; sourceTree = "<group>"; };
 		33B36977183C15E800D0A1F6 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		9B0A922318473CAC002D5AB3 /* ABNetworkBrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABNetworkBrowserViewController.h; sourceTree = "<group>"; };
+		9B0A922418473CAC002D5AB3 /* ABNetworkBrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABNetworkBrowserViewController.m; sourceTree = "<group>"; };
+		9B4005EA1847312200D269D4 /* ABNetworkServiceBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABNetworkServiceBrowser.h; sourceTree = "<group>"; };
+		9B4005EB1847312200D269D4 /* ABNetworkServiceBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABNetworkServiceBrowser.m; sourceTree = "<group>"; };
+		9B8B3FAA184BF78A008D7552 /* FlyByWireServer.dmg */ = {isa = PBXFileReference; lastKnownFileType = file; path = FlyByWireServer.dmg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,8 +105,8 @@
 		33B368C2183B7BA000D0A1F6 = {
 			isa = PBXGroup;
 			children = (
+				9B8B3FA7184BE9D0008D7552 /* FlyByWireServerOSX */,
 				33B36977183C15E800D0A1F6 /* README.md */,
-				33B36974183C150400D0A1F6 /* FlyByWireServerOSX */,
 				33B368D4183B7BA000D0A1F6 /* FlyByWire */,
 				33B368F6183B7BA100D0A1F6 /* FlyByWireTests */,
 				33B368CD183B7BA000D0A1F6 /* Frameworks */,
@@ -140,16 +142,18 @@
 				33B368DE183B7BA000D0A1F6 /* ABAppDelegate.m */,
 				33B36970183C112100D0A1F6 /* ABNetworkController.h */,
 				33B36971183C112100D0A1F6 /* ABNetworkController.m */,
-				33B368E0183B7BA000D0A1F6 /* Main_iPhone.storyboard */,
-				33B368E3183B7BA000D0A1F6 /* Main_iPad.storyboard */,
-				33B3696E183C112100D0A1F6 /* ABConnectViewController.h */,
-				33B3696F183C112100D0A1F6 /* ABConnectViewController.m */,
-				33B368E6183B7BA000D0A1F6 /* ABViewController.h */,
-				33B368E7183B7BA000D0A1F6 /* ABViewController.m */,
+				9B4005EA1847312200D269D4 /* ABNetworkServiceBrowser.h */,
+				9B4005EB1847312200D269D4 /* ABNetworkServiceBrowser.m */,
+				9B0A922318473CAC002D5AB3 /* ABNetworkBrowserViewController.h */,
+				9B0A922418473CAC002D5AB3 /* ABNetworkBrowserViewController.m */,
+				33B368E6183B7BA000D0A1F6 /* ABTouchViewController.h */,
+				33B368E7183B7BA000D0A1F6 /* ABTouchViewController.m */,
 				33B36906183B7C8500D0A1F6 /* ABTouchView.h */,
 				33B36907183B7C8500D0A1F6 /* ABTouchView.m */,
 				33B36909183B7CB900D0A1F6 /* ABTouchEvent.h */,
 				33B3690A183B7CB900D0A1F6 /* ABTouchEvent.m */,
+				33B368E0183B7BA000D0A1F6 /* Main_iPhone.storyboard */,
+				33B368E3183B7BA000D0A1F6 /* Main_iPad.storyboard */,
 				33B368E9183B7BA100D0A1F6 /* Images.xcassets */,
 				33B368D5183B7BA000D0A1F6 /* Supporting Files */,
 			);
@@ -185,10 +189,10 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		33B36974183C150400D0A1F6 /* FlyByWireServerOSX */ = {
+		9B8B3FA7184BE9D0008D7552 /* FlyByWireServerOSX */ = {
 			isa = PBXGroup;
 			children = (
-				33B36975183C150400D0A1F6 /* server.py */,
+				9B8B3FAA184BF78A008D7552 /* FlyByWireServer.dmg */,
 			);
 			path = FlyByWireServerOSX;
 			sourceTree = "<group>";
@@ -277,7 +281,6 @@
 				33B368E5183B7BA000D0A1F6 /* Main_iPad.storyboard in Resources */,
 				33B368EA183B7BA100D0A1F6 /* Images.xcassets in Resources */,
 				33B368E2183B7BA000D0A1F6 /* Main_iPhone.storyboard in Resources */,
-				33B36976183C150400D0A1F6 /* server.py in Resources */,
 				33B368D9183B7BA000D0A1F6 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -297,12 +300,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				33B36972183C112100D0A1F6 /* ABConnectViewController.m in Sources */,
 				33B36973183C112100D0A1F6 /* ABNetworkController.m in Sources */,
 				33B368DB183B7BA000D0A1F6 /* main.m in Sources */,
+				9B0A922518473CAC002D5AB3 /* ABNetworkBrowserViewController.m in Sources */,
 				33B36908183B7C8500D0A1F6 /* ABTouchView.m in Sources */,
-				33B368E8183B7BA000D0A1F6 /* ABViewController.m in Sources */,
+				33B368E8183B7BA000D0A1F6 /* ABTouchViewController.m in Sources */,
 				33B3690B183B7CB900D0A1F6 /* ABTouchEvent.m in Sources */,
+				9B4005EC1847312200D269D4 /* ABNetworkServiceBrowser.m in Sources */,
 				33B368DF183B7BA000D0A1F6 /* ABAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

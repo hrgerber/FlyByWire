@@ -2,27 +2,33 @@
 //  ABNetworkController.m
 //  FlyByWire
 //
-//  Created by abductive on 2013/11/19.
-//  Copyright (c) 2013 Retief Gerber. All rights reserved.
+//  Created by Retief Gerber on 2013/11/19.
+//  Copyright (c) 2013 abductive. All rights reserved.
 //
 
 #import "ABNetworkController.h"
 
+@interface ABNetworkController ()
+
+@property (strong, nonatomic) NSNetService *service;
+
+@property (strong, nonatomic) NSInputStream *inputStream;
+@property (strong, nonatomic) NSOutputStream *outputStream;
+
+@end
+
 @implementation ABNetworkController
+
+@synthesize service = _service;
 
 @synthesize inputStream = _inputStream;
 @synthesize outputStream = _outputStream;
+
 @synthesize delegate = _delegate;
 
-- (void)initNetworkCommunication:(NSString *)host
+- (void)initNetworkCommunicationWithService:(NSNetService *)service
 {
-    CFReadStreamRef readStream;
-    CFWriteStreamRef writeStream;
-
-    CFStreamCreatePairWithSocketToHost(NULL, (__bridge CFStringRef)host, 8000, &readStream, &writeStream);
-    
-    self.inputStream = (NSInputStream *)CFBridgingRelease(readStream);
-    self.outputStream = (NSOutputStream *)CFBridgingRelease(writeStream);
+    [service getInputStream:&(_inputStream) outputStream:&(_outputStream)];
     
     [self.inputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
     [self.outputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
@@ -85,7 +91,6 @@
             
         
         case NSStreamEventHasSpaceAvailable:
-            NSLog(@"Space available");
             break;
             
 		default:

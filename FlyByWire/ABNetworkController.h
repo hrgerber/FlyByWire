@@ -2,8 +2,8 @@
 //  ABNetworkController.h
 //  FlyByWire
 //
-//  Created by abductive on 2013/11/19.
-//  Copyright (c) 2013 Retief Gerber. All rights reserved.
+//  Created by Retief Gerber on 2013/11/19.
+//  Copyright (c) 2013 abductive. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -20,12 +20,9 @@
 
 @interface ABNetworkController : NSObject <NSStreamDelegate>
 
-@property (strong, nonatomic) NSInputStream *inputStream;
-@property (strong, nonatomic) NSOutputStream *outputStream;
-
 @property (assign, nonatomic) id<ABNetworkControllerDelegate> delegate;
 
-- (void)initNetworkCommunication:(NSString *)host;
+- (void)initNetworkCommunicationWithService:(NSNetService *)service;
 - (void)terminateNetworkCommunication;
 
 - (void)sendMessage:(NSString *)msg;
