@@ -51,9 +51,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    [self.serviceBrowser startSearch];
-//    //[self.connectingActivity startAnimating];
-//    [self _updateUIOnMainThreadForEvent:ABNetworkBrowserViewControllerEventSearchAction];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -96,7 +93,6 @@
 
     [self.serviceBrowser stopSearch];
     [self.serviceBrowser startSearch];
-    //[self.connectingActivity startAnimating];
 
     [self _updateUIOnMainThreadForEvent:ABNetworkBrowserViewControllerEventSearchAction];
 }

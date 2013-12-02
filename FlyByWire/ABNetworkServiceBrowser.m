@@ -34,19 +34,7 @@
 - (void)startSearch
 {
     self.services = [[NSMutableArray alloc] init];
-//    if (self.searchTimer)
-//    {
-//        [self.searchTimer invalidate];
-//        self.searchTimer = nil;
-//    }
-    
     [self.browser searchForServicesOfType:@"_flybywire._tcp" inDomain:@""];
-//    self.searchTimer = [NSTimer scheduledTimerWithTimeInterval:30
-//                                                          target:self
-//                                                        selector:@selector(_searchTimerTriggered)
-//                                                        userInfo:nil
-//                                                         repeats:NO];
-//    [[NSRunLoop currentRunLoop] addTimer:self.searchTimer forMode:NSRunLoopCommonModes];
 }
 
 - (void)stopSearch
@@ -61,12 +49,6 @@
         [self.delegate searchFinished];
     }
 }
-
-
-//- (void)_searchTimerTriggered
-//{
-//    [self stopSearch];
-//}
 
 - (void)netServiceBrowserWillSearch:(NSNetServiceBrowser *)aNetServiceBrowser
 {
