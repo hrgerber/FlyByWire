@@ -51,17 +51,21 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
-    [self.serviceBrowser startSearch];
-    [self.connectingActivity startAnimating];
-
-    [self _updateUIOnMainThreadForEvent:ABNetworkBrowserViewControllerEventSearchAction];
+//    [self.serviceBrowser startSearch];
+//    //[self.connectingActivity startAnimating];
+//    [self _updateUIOnMainThreadForEvent:ABNetworkBrowserViewControllerEventSearchAction];
 }
 
-- (void)didReceiveMemoryWarning
+- (void)viewWillAppear:(BOOL)animated
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    [super viewWillAppear:animated];
+    [self.serviceBrowser startSearch];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self.serviceBrowser stopSearch];
 }
 
 - (void)foundService:(NSNetService *)service moreComing:(BOOL)moreComing
@@ -69,6 +73,13 @@
     [self.servicePicker reloadAllComponents];
     
     [self _updateUIOnMainThreadForEvent:ABNetworkBrowserViewControllerEventSearchResult];
+}
+
+- (void)removedService:(NSNetService *)service moreComing:(BOOL)moreComing
+{
+    [self.servicePicker reloadAllComponents];
+    
+    [self _updateUIOnMainThreadForEvent:ABNetworkBrowserViewControllerEventSearchResult];    
 }
 
 - (void)foundNothing
@@ -83,8 +94,9 @@
 
 - (IBAction)searchAction:(id)sender {
 
+    [self.serviceBrowser stopSearch];
     [self.serviceBrowser startSearch];
-    [self.connectingActivity startAnimating];
+    //[self.connectingActivity startAnimating];
 
     [self _updateUIOnMainThreadForEvent:ABNetworkBrowserViewControllerEventSearchAction];
 }
@@ -154,8 +166,9 @@
 
 - (void)_updateUIOnMainThreadForEvent:(ABNetworkBrowserViewControllerEvent)event
 {
-    [self _updateUIForEventNumber:[NSNumber numberWithInt:event]];
-    //[self performSelectorOnMainThread:@selector(_updateUIForEventNumber:) withObject:[NSNumber numberWithInt:event] waitUntilDone:NO];
+    // NOTE: The next line is for easier debugging, when needed
+    //[self _updateUIForEventNumber:[NSNumber numberWithInt:event]];
+    [self performSelectorOnMainThread:@selector(_updateUIForEventNumber:) withObject:[NSNumber numberWithInt:event] waitUntilDone:NO];
 }
 
 - (void)_updateUIForEventNumber:(NSNumber *)number
@@ -170,12 +183,9 @@
             }
             else if (event == ABNetworkBrowserViewControllerEventSearchDone)
             {
-                self.searchBtn.enabled = true;
-                [self.connectingActivity stopAnimating];
-                
                 self.controllerState = ABNetworkBrowserViewControllerStateReady;
             }
-        // Do not change the order of these two cases they rely on one another
+        // NOTE: Do not change the order of these two cases they rely on one another
         case ABNetworkBrowserViewControllerStateReady:
             if (event == ABNetworkBrowserViewControllerEventConnectAction)
             {
@@ -184,6 +194,8 @@
                 self.connectBtn.enabled = false;
                 self.cancelBtn.hidden = false;
                 [self.connectingActivity startAnimating];
+                self.statusLabel.text = @"connecting...";
+                self.statusLabel.hidden = NO;
                 
                 self.controllerState = ABNetworkBrowserViewControllerStateConnecting;
             }
@@ -193,17 +205,14 @@
             }
             else if (event == ABNetworkBrowserViewControllerEventSearchAction)
             {
-            
-                self.searchBtn.enabled = false;
-                
                 self.controllerState = ABNetworkBrowserViewControllerStateSearching;
             }
             else if (event == ABNetworkBrowserViewControllerEventSearchDone)
             {
-                self.searchBtn.enabled = true;
+                // Nothing to do
             }
             else {
-                NSLog(@"Invalid event %d in controller state ABNetworkBrowserViewControllerStateReady", event);
+                NSLog(@"Invalid event %lu in controller state ABNetworkBrowserViewControllerStateReady", event);
             }
             break;
             
@@ -212,8 +221,8 @@
             {
                 self.connectBtn.hidden = true;
                 self.disconnectBtn.hidden = false;
-                self.cancelBtn.hidden = true;
                 self.statusLabel.hidden = false;
+                self.statusLabel.text = @"configuring...";
                 
                 self.controllerState = ABNetworkBrowserViewControllerStateConfiguring;
             }
@@ -230,10 +239,10 @@
             }
             else if (event == ABNetworkBrowserViewControllerEventSearchDone)
             {
-                self.searchBtn.enabled = true;
+                // Nothing to do
             }
             else {
-                NSLog(@"Invalid event %d in controller state ABNetworkBrowserViewControllerStateConnecting", event);
+                NSLog(@"Invalid event %lu in controller state ABNetworkBrowserViewControllerStateConnecting", event);
             }
             break;
         case ABNetworkBrowserViewControllerStateConfiguring:
@@ -244,6 +253,7 @@
                 self.connectBtn.enabled = true;
                 self.disconnectBtn.hidden = true;
                 self.statusLabel.hidden = true;
+                self.cancelBtn.hidden = true;
                 [self.connectingActivity stopAnimating];
                 
                 self.controllerState = ABNetworkBrowserViewControllerStateReady;
@@ -252,15 +262,16 @@
             {
                 self.statusLabel.hidden = true;
                 [self.connectingActivity stopAnimating];
+                self.cancelBtn.hidden = true;
                 
                 self.controllerState = ABNetworkBrowserViewControllerStateConnected;
             }
             else if (event == ABNetworkBrowserViewControllerEventSearchDone)
             {
-                self.searchBtn.enabled = true;
+                // Nothing to do
             }
             else {
-                NSLog(@"Invalid event %d in controller state ABNetworkBrowserViewControllerStateConfiguring", event);
+                NSLog(@"Invalid event %lu in controller state ABNetworkBrowserViewControllerStateConfiguring", event);
             }
             break;
         case ABNetworkBrowserViewControllerStateConnected:
@@ -272,20 +283,19 @@
                 self.connectBtn.enabled = true;
                 self.disconnectBtn.hidden = true;
                 
-                self.searchBtn.enabled = true;
-                
                 self.controllerState = ABNetworkBrowserViewControllerStateReady;
-            }
-            else if (event == ABNetworkBrowserViewControllerEventSearchDone)
-            {
-                self.searchBtn.enabled = true;
             }
             else if (event == ABNetworkBrowserViewControllerEventConnectEstablished)
             {
-                NSLog(@"From where");
+                // Nothing to do
+            }
+            else if ((event == ABNetworkBrowserViewControllerEventSearchResult) ||
+                     (event == ABNetworkBrowserViewControllerEventSearchDone))
+            {
+                // Nothing to do
             }
             else {
-                NSLog(@"Invalid event %d in controller state ABNetworkBrowserViewControllerStateConnected", event);
+                NSLog(@"Invalid event %lu in controller state ABNetworkBrowserViewControllerStateConnected", event);
             }
             break;
         case ABNetworkBrowserViewControllerStateError:
@@ -372,6 +382,7 @@
     
     if ([msg isEqualToString:@"ACK"])
     {
+        sleep(1);
         // Update UI
         [self _updateUIOnMainThreadForEvent:ABNetworkBrowserViewControllerEventConnectEstablished];
         

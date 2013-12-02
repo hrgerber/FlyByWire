@@ -12,6 +12,7 @@
 
 @optional
 - (void)foundService:(NSNetService *)service moreComing:(BOOL)moreComing;
+- (void)removedService:(NSNetService *)service moreComing:(BOOL)moreComing;
 - (void)foundNothing;
 - (void)searchFinished;
 
@@ -25,5 +26,6 @@
 
 
 - (void)startSearch;
+- (void)stopSearch;
 
 @end

@@ -49,7 +49,7 @@
 - (void)stream:(NSStream *)aStream handleEvent:(NSStreamEvent)eventCode
 {
     uint8_t buffer[1024];
-    int len;
+    NSInteger len;
 	
     switch (eventCode) {
             

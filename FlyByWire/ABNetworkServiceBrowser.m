@@ -11,7 +11,6 @@
 @interface ABNetworkServiceBrowser()
 
 @property (strong, nonatomic) NSNetServiceBrowser *browser;
-
 @property (strong, nonatomic) NSTimer *searchTimer;
 
 @end
@@ -19,27 +18,9 @@
 @implementation ABNetworkServiceBrowser
 
 @synthesize browser = _browser;
-
 @synthesize services = _services;
-
 @synthesize delegate = _delegate;
-
 @synthesize searchTimer = _searchTimer;
-
-- (id)init
-{
-    self = [super init];
-    if (self) {
-    }
-    return self;
-}
-
-- (NSMutableArray *)services
-{
-    if (!_services) {
-    }
-    return _services;
-}
 
 - (NSNetServiceBrowser *)browser
 {
@@ -53,26 +34,39 @@
 - (void)startSearch
 {
     self.services = [[NSMutableArray alloc] init];
+//    if (self.searchTimer)
+//    {
+//        [self.searchTimer invalidate];
+//        self.searchTimer = nil;
+//    }
     
     [self.browser searchForServicesOfType:@"_flybywire._tcp" inDomain:@""];
-    self.searchTimer = [NSTimer scheduledTimerWithTimeInterval:30
-                                                          target:self
-                                                        selector:@selector(_searchTimerTriggered)
-                                                        userInfo:nil
-                                                         repeats:NO];
-    [[NSRunLoop currentRunLoop] addTimer:self.searchTimer forMode:NSRunLoopCommonModes];
+//    self.searchTimer = [NSTimer scheduledTimerWithTimeInterval:30
+//                                                          target:self
+//                                                        selector:@selector(_searchTimerTriggered)
+//                                                        userInfo:nil
+//                                                         repeats:NO];
+//    [[NSRunLoop currentRunLoop] addTimer:self.searchTimer forMode:NSRunLoopCommonModes];
 }
 
 - (void)stopSearch
 {
     [self.browser stop];
+    
+    [self.searchTimer invalidate];
+    self.searchTimer = nil;
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(searchFinished)])
+    {
+        [self.delegate searchFinished];
+    }
 }
 
 
-- (void)_searchTimerTriggered
-{
-    [self stopSearch];
-}
+//- (void)_searchTimerTriggered
+//{
+//    [self stopSearch];
+//}
 
 - (void)netServiceBrowserWillSearch:(NSNetServiceBrowser *)aNetServiceBrowser
 {
@@ -82,43 +76,57 @@
 - (void)netServiceBrowserDidStopSearch:(NSNetServiceBrowser *)aNetServiceBrowser
 {
     NSLog(@"netServiceBrowserDidStopSearch:");
-    
-    [self.searchTimer invalidate];
-    self.searchTimer = nil;
-    
-    if (self.delegate && [self.delegate respondsToSelector:@selector(searchFinished)]) {
-        [self.delegate searchFinished];
-    }
+
+    [self stopSearch];
 }
 
 - (void)netServiceBrowser:(NSNetServiceBrowser *)aNetServiceBrowser didNotSearch:(NSDictionary *)errorDict
 {
     NSLog(@"netServiceBrowser:didNotSearch:");
-}
-
-- (void)netServiceBrowser:(NSNetServiceBrowser *)aNetServiceBrowser didFindDomain:(NSString *)domainString moreComing:(BOOL)moreComing
-{
-    NSLog(@"netServiceBrowser:didFindDomain:moreComing:");
+    [self stopSearch];
 }
 
 - (void)netServiceBrowser:(NSNetServiceBrowser *)aNetServiceBrowser didFindService:(NSNetService *)aNetService moreComing:(BOOL)moreComing
 {
     NSLog(@"netServiceBrowser:didFindService:moreComing:");
-    if (self.delegate && [self.delegate respondsToSelector:@selector(foundService:moreComing:)]) {
+    
+    // Only add new services, but this test might not be the correct way
+    NSInteger index = [self _indexOfService:aNetService];
+    if (index == -1)
+    {
         [self.services addObject:aNetService];
-        [self.delegate foundService:aNetService moreComing:moreComing];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(foundService:moreComing:)])
+        {
+            [self.delegate foundService:aNetService moreComing:moreComing];
+        }
     }
-}
-
-- (void)netServiceBrowser:(NSNetServiceBrowser *)aNetServiceBrowser didRemoveDomain:(NSString *)domainString moreComing:(BOOL)moreComing
-{
-    NSLog(@"netServiceBrowser:didRemoveDomain:moreComing:");
 }
 
 - (void)netServiceBrowser:(NSNetServiceBrowser *)aNetServiceBrowser didRemoveService:(NSNetService *)aNetService moreComing:(BOOL)moreComing
 {
     NSLog(@"netServiceBrowser:didRemoveService:moreComing:");
+    // Only remove services thats already in the list, but this test might not be the correct way
+    NSInteger index = [self _indexOfService:aNetService];
+    if (index != -1)
+    {
+        [self.services removeObjectAtIndex:index];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(removedService:moreComing:)])
+        {
+            [self.delegate removedService:aNetService moreComing:moreComing];
+        }
+    }
 }
 
+- (NSInteger)_indexOfService:(NSNetService *)service
+{
+    long len = [self.services count];
+    for (long x=0; x<len; x++)
+    {
+        NSNetService *temp = [self.services objectAtIndex:x];
+        if ([temp.name isEqualToString:service.name])
+            return x;
+    }
+    return -1;
+}
 
 @end

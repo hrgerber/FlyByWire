@@ -47,7 +47,7 @@
 
 - (void)_transmitTouchEvent:(ABTouchEvent *)touchEvent
 {
-    NSString *msg = [NSString stringWithFormat:@"T%02d:B%02d:X%04d:Y%04d.", touchEvent.type, 0, (int)touchEvent.point.x, (int)touchEvent.point.y];
+    NSString *msg = [NSString stringWithFormat:@"T%02lu:B%02d:X%04d:Y%04d.", touchEvent.type, 0, (int)touchEvent.point.x, (int)touchEvent.point.y];
     [self.networkController sendMessage:msg];
 }
 
