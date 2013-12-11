@@ -61,13 +61,13 @@
 		case NSStreamEventOpenCompleted:
 			NSLog(@"Stream opened");
 
-            // Disble Nagle's algorithm to improve network responsiveness
-            CFDataRef nativeSocket = CFWriteStreamCopyProperty((CFWriteStreamRef)self.outputStream, kCFStreamPropertySocketNativeHandle);
-            CFSocketNativeHandle *sock = (CFSocketNativeHandle *)CFDataGetBytePtr(nativeSocket);
-            setsockopt(*sock, IPPROTO_TCP, TCP_NODELAY, &(int){ 1 }, sizeof(int));
-
             if (aStream == self.outputStream)
             {
+                // Disble Nagle's algorithm to improve network responsiveness
+                CFDataRef nativeSocket = CFWriteStreamCopyProperty((CFWriteStreamRef)self.outputStream, kCFStreamPropertySocketNativeHandle);
+                CFSocketNativeHandle *sock = (CFSocketNativeHandle *)CFDataGetBytePtr(nativeSocket);
+                setsockopt(*sock, IPPROTO_TCP, TCP_NODELAY, &(int){ 1 }, sizeof(int));
+
                 if ([self.delegate respondsToSelector:@selector(connectedToServer)])
                     [self.delegate connectedToServer];
             }
@@ -118,7 +118,7 @@
 - (void)sendMessage:(NSString *)msg
 {
     // This will ensure the send messages while handling a received message does not block
-    // TODO: Figure out if there is a better way to do this
+    // TODO: Figure out if there is a better way to do this, should use NSOperation
     [self performSelectorInBackground:@selector(threadedSendMessage:) withObject:msg];
 }
 
