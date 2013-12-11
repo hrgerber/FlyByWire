@@ -8,6 +8,9 @@
 
 #import "ABNetworkController.h"
 
+#import <netinet/tcp.h>
+#import <netinet/in.h>
+
 @interface ABNetworkController ()
 
 @property (strong, nonatomic) NSNetService *service;
@@ -33,11 +36,13 @@
     [self.inputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
     [self.outputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
     
+    self.outputStream.delegate = self;
+    self.inputStream.delegate = self;
+    
     [self.inputStream open];
     [self.outputStream open];
     
-    self.outputStream.delegate = self;
-    self.inputStream.delegate = self;
+
 }
 
 - (void)terminateNetworkCommunication
@@ -55,6 +60,12 @@
             
 		case NSStreamEventOpenCompleted:
 			NSLog(@"Stream opened");
+
+            // Disble Nagle's algorithm to improve network responsiveness
+            CFDataRef nativeSocket = CFWriteStreamCopyProperty((CFWriteStreamRef)self.outputStream, kCFStreamPropertySocketNativeHandle);
+            CFSocketNativeHandle *sock = (CFSocketNativeHandle *)CFDataGetBytePtr(nativeSocket);
+            setsockopt(*sock, IPPROTO_TCP, TCP_NODELAY, &(int){ 1 }, sizeof(int));
+
             if (aStream == self.outputStream)
             {
                 if ([self.delegate respondsToSelector:@selector(connectedToServer)])
