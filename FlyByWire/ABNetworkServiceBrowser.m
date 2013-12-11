@@ -58,7 +58,6 @@
 - (void)netServiceBrowserDidStopSearch:(NSNetServiceBrowser *)aNetServiceBrowser
 {
     NSLog(@"netServiceBrowserDidStopSearch:");
-
     [self stopSearch];
 }
 
