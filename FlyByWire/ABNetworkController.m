@@ -18,6 +18,8 @@
 @property (strong, nonatomic) NSInputStream *inputStream;
 @property (strong, nonatomic) NSOutputStream *outputStream;
 
+@property (strong, nonatomic) NSOperationQueue *transmitQueue;
+
 @end
 
 @implementation ABNetworkController
@@ -29,8 +31,13 @@
 
 @synthesize delegate = _delegate;
 
+@synthesize transmitQueue = _transmitQueue;
+
 - (void)initNetworkCommunicationWithService:(NSNetService *)service
 {
+    self.transmitQueue = [[NSOperationQueue alloc] init];
+    [self.transmitQueue setMaxConcurrentOperationCount:10];
+    
     [service getInputStream:&(_inputStream) outputStream:&(_outputStream)];
     
     [self.inputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
@@ -63,7 +70,7 @@
 
             if (aStream == self.outputStream)
             {
-                // Disble Nagle's algorithm to improve network responsiveness
+                // Disable Nagle's algorithm to improve network responsiveness
                 CFDataRef nativeSocket = CFWriteStreamCopyProperty((CFWriteStreamRef)self.outputStream, kCFStreamPropertySocketNativeHandle);
                 CFSocketNativeHandle *sock = (CFSocketNativeHandle *)CFDataGetBytePtr(nativeSocket);
                 setsockopt(*sock, IPPROTO_TCP, TCP_NODELAY, &(int){ 1 }, sizeof(int));
@@ -109,7 +116,7 @@
 	}
 }
 
-- (void)threadedSendMessage:(NSString *)msg
+- (void)_sendMessageOperation:(NSString *)msg
 {
     NSData *data = [[NSData alloc] initWithData:[msg dataUsingEncoding:NSASCIIStringEncoding]];
     [self.outputStream write:[data bytes]  maxLength:[data length]];
@@ -118,8 +125,13 @@
 - (void)sendMessage:(NSString *)msg
 {
     // This will ensure the send messages while handling a received message does not block
-    // TODO: Figure out if there is a better way to do this, should use NSOperation
-    [self performSelectorInBackground:@selector(threadedSendMessage:) withObject:msg];
+    NSInvocationOperation *operation = [[NSInvocationOperation alloc] initWithTarget:self
+                                                                            selector:@selector(_sendMessageOperation:)
+                                                                              object:msg];
+    [operation setThreadPriority:1.0];
+    [operation setQueuePriority:NSOperationQueuePriorityVeryHigh];
+    
+    [self.transmitQueue addOperation:operation];
 }
 
 
